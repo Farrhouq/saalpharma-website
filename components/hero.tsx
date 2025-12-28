@@ -1,30 +1,50 @@
-"use client"
+"use client";
 
-import { ArrowRight, Play, ShieldCheck, Clock, Award, Phone } from "lucide-react"
-import Link from "next/link"
-import { useScrollAnimation, useCountAnimation } from "@/hooks/use-scroll-animation"
+import {
+  ArrowRight,
+  ShieldCheck,
+  Clock,
+  Award,
+  Phone,
+} from "lucide-react";
+import Link from "next/link";
+import {
+  useScrollAnimation,
+  useCountAnimation,
+} from "@/hooks/use-scroll-animation";
 
 export default function Hero() {
-  const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation()
-  const { count: patientsCount, ref: patientsRef } = useCountAnimation(50000)
-  const { count: productsCount, ref: productsRef } = useCountAnimation(500)
-  const { count: locationsCount, ref: locationsRef } = useCountAnimation(25)
+  const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
+  const { count: patientsCount, ref: patientsRef } = useCountAnimation(50000);
+  const { count: productsCount, ref: productsRef } = useCountAnimation(500);
+  const { count: locationsCount, ref: locationsRef } = useCountAnimation(25);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white via-white to-gray-50 overflow-hidden">
+    <section className="sm:pt-32 pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-white via-white to-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div ref={heroRef} className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div className={`space-y-8 animate-slide-left ${heroVisible ? "visible" : ""}`}>
+          <div
+            className={`space-y-8 animate-slide-left ${heroVisible ? "visible" : ""}`}
+          >
             <div className="space-y-4">
               <div className="inline-block px-4 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium animate-shimmer">
                 Welcome to S.A.A Lecacy Pharmaceuticals LTD
               </div>
-              <h1 className="text-5xl sm:text-6xl font-bold text-secondary leading-tight">
-                Your Health, Our{" "}
+              <h1 className="text-4xl sm:text-6xl font-bold text-secondary leading-tight">
+                When you need it, {" "}
                 <span className="text-primary relative">
-                  Priority
-                  <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none">
+                  We supply it
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full"
+                    viewBox="0 0 200 12"
+                    fill="none"
+                  >
                     <path
                       d="M2 10C50 4 150 4 198 10"
                       stroke="currentColor"
@@ -41,8 +61,9 @@ export default function Hero() {
                 </span>
               </h1>
               <p className="text-lg mt-8 text-gray-600 leading-relaxed max-w-lg">
-                Trusted by over 50,000 patients, we provide quality medications, healthcare products, and expert
-                pharmaceutical services with compassion and excellence.
+                Trusted by over 50,000 patients, we provide quality medications,
+                healthcare products, and expert pharmaceutical services with
+                compassion and excellence.
               </p>
             </div>
 
@@ -50,11 +71,20 @@ export default function Hero() {
               <Link href="/products">
                 <button className="group btn-animated px-8 py-4 bg-primary text-white rounded-xl hover:bg-primary/90 font-semibold flex items-center justify-center gap-2 w-full sm:w-auto hover-glow">
                   Browse Products
-                  <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform duration-300" />
+                  <ArrowRight
+                    size={20}
+                    className="group-hover:translate-x-2 transition-transform duration-300"
+                  />
                 </button>
               </Link>
-              <button className="group px-8 py-4 border-2 border-primary text-primary rounded-xl hover:bg-primary hover:text-white transition-all duration-300 font-semibold flex items-center justify-center gap-3">
-                <Phone size={20} className="group-hover:scale-110 transition-transform" />
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="group px-8 py-4 border-2 border-primary text-primary rounded-xl hover:bg-primary hover:text-white transition-all duration-300 font-semibold flex items-center justify-center gap-3"
+              >
+                <Phone
+                  size={20}
+                  className="group-hover:scale-110 transition-transform"
+                />
                 Contact Us
               </button>
             </div>
@@ -67,7 +97,9 @@ export default function Hero() {
                   </span>
                   K+
                 </p>
-                <p className="text-sm text-gray-600 group-hover:text-primary transition-colors">Happy Patients</p>
+                <p className="text-sm text-gray-600 group-hover:text-primary transition-colors">
+                  Happy Patients
+                </p>
               </div>
               <div className="group cursor-default">
                 <p className="text-2xl sm:text-3xl font-bold text-primary">
@@ -76,7 +108,9 @@ export default function Hero() {
                   </span>
                   +
                 </p>
-                <p className="text-sm text-gray-600 group-hover:text-primary transition-colors">Products</p>
+                <p className="text-sm text-gray-600 group-hover:text-primary transition-colors">
+                  Products
+                </p>
               </div>
               <div className="group cursor-default">
                 <p className="text-2xl sm:text-3xl font-bold text-primary">
@@ -84,13 +118,17 @@ export default function Hero() {
                     {locationsCount}
                   </span>
                 </p>
-                <p className="text-sm text-gray-600 group-hover:text-primary transition-colors">Locations</p>
+                <p className="text-sm text-gray-600 group-hover:text-primary transition-colors">
+                  Locations
+                </p>
               </div>
             </div>
           </div>
 
           {/* Right Image */}
-          <div className={`relative animate-slide-right ${heroVisible ? "visible" : ""}`}>
+          <div
+            className={`relative animate-slide-right ${heroVisible ? "visible" : ""}`}
+          >
             <div
               className="-top-4 -right-4 image-card animate-float"
               style={{ animationDelay: "0s" }}
@@ -110,7 +148,7 @@ export default function Hero() {
               <Award size={28} className="text-primary" />
             </div>
 
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/5 rounded-3xl blur-3xl animate-pulse-glow"></div>
+            <div className="absolute inset-0 bg-linear-to-r from-primary/20 to-primary/5 rounded-3xl blur-3xl animate-pulse-glow"></div>
             <img
               src="/modern-pharmacy-storefront-with-green-cross-sign-h.jpg"
               alt="Modern pharmacy storefront"
@@ -127,7 +165,9 @@ export default function Hero() {
                 </div>
                 <div>
                   <p className="font-bold text-secondary">24/7 Available</p>
-                  <p className="text-sm text-gray-600">Emergency services always open</p>
+                  <p className="text-sm text-gray-600">
+                    Emergency services always open
+                  </p>
                 </div>
               </div>
             </div>
@@ -135,5 +175,5 @@ export default function Hero() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -385,7 +385,7 @@ export default function ProductDetailsPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-primary/5 to-white">
+      <section className="pt-32 pb-12 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-primary/5 to-white">
         <div className="max-w-4xl mx-auto">
           <Link href="/products">
             <button className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-6 font-medium">
@@ -405,7 +405,7 @@ export default function ProductDetailsPage() {
           <div className="grid md:grid-cols-2 gap-12">
             {/* Left Column - Image Area */}
             <div className="flex flex-col gap-6">
-              <div className="w-full aspect-square bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl flex items-center justify-center border-2 border-primary/20">
+              <div className="w-full aspect-square bg-linear-to-br from-primary/10 to-primary/5 rounded-2xl flex items-center justify-center border-2 border-primary/20">
                 <div className="w-32 h-32 bg-primary/20 rounded-full flex items-center justify-center">
                   <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center text-primary/60 text-center">
                     <span className="text-sm font-semibold">{product.name}</span>
@@ -450,7 +450,7 @@ export default function ProductDetailsPage() {
                 <div className="space-y-3">
                   {product.uses.map((use) => (
                     <div key={use} className="flex items-start gap-3">
-                      <div className="w-5 h-5 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div className="w-5 h-5 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
                         <Check size={16} className="text-primary" />
                       </div>
                       <span className="text-gray-700">{use}</span>

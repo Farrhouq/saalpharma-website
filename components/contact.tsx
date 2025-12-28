@@ -1,46 +1,114 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from "lucide-react"
-import { useState } from "react"
-import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import type React from "react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Send,
+  CheckCircle,
+  Dot,
+} from "lucide-react";
+import { useState } from "react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import { toast } from "sonner";
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const { ref: sectionRef, isVisible } = useScrollAnimation()
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { ref: sectionRef, isVisible } = useScrollAnimation();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  const formatGhanaNumber = (value: string) => {
+    const digits = value.replace(/\D/g, "");
+
+    if (!digits.startsWith("233")) return "+233 ";
+
+    const rest = digits.slice(3, 12); // 9 digits max
+    const parts = [rest.slice(0, 2), rest.slice(2, 5), rest.slice(5, 9)].filter(
+      Boolean,
+    );
+
+    return `+233 ${parts.join(" ")}`;
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    if (name === "phone") {
+      setFormData((prev) => ({
+        ...prev,
+        phone: formatGhanaNumber(value),
+      }));
+      return;
+    }
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    // Simulate submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    setFormData({ name: "", email: "", phone: "", message: "" })
-    setTimeout(() => setIsSubmitted(false), 3000)
-  }
+    setIsSubmitting(true);
+    e.preventDefault();
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      toast.success("Order submitted successfully!");
+      setIsSubmitted(true);
+      setIsSubmitting(false);
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.message || "Something went wrong");
+      setIsSubmitting(false);
+    }
+  };
 
   const contactInfo = [
-    { icon: Phone, title: "Phone", content: "+233 30 123 4567", subtext: "Available 24/7" },
-    { icon: Mail, title: "Email", content: "info@saalpharmacy.com.gh", subtext: "Response within 2 hours" },
-    { icon: MapPin, title: "Main Location", content: "123 Independence Avenue", subtext: "Accra, Ghana" },
-    { icon: Clock, title: "Hours", content: "9 AM - 10 PM Daily", subtext: "Open on weekends" },
-  ]
+    // { icon: Phone, title: "Phone", content: "+233 24 428 1798 | +233 55 446 6790 | +233 54 014 0001" },
+    { icon: Mail, title: "Email", content: "saalpharm@gmail.com" },
+    {
+      icon: MapPin,
+      title: "Main Location",
+      content: "Ghana, Kumasi-Boubai (AS-002-8398)",
+    },
+    { icon: Clock, title: "Hours", content: "8 AM - 5 PM Daily" },
+  ];
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
+    <section
+      id="contact"
+      className="py-20 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden"
+    >
       <div ref={sectionRef} className="max-w-7xl mx-auto">
-        <div className={`text-center space-y-4 mb-16 animate-on-scroll ${isVisible ? "visible" : ""}`}>
+        <div
+          className={`text-center space-y-4 mb-16 animate-on-scroll ${isVisible ? "visible" : ""}`}
+        >
           <div className="inline-block px-4 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
             Get In Touch
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-secondary">
+          <h2 className="text-3xl sm:text-5xl font-bold text-secondary">
             Contact <span className="text-primary">Us Today</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
@@ -49,37 +117,73 @@ export default function Contact() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
-          <div className={`space-y-8 animate-slide-left ${isVisible ? "visible" : ""}`}>
+          <div
+            className={`space-y-8 animate-slide-left ${isVisible ? "visible" : ""}`}
+          >
             <div className="space-y-6">
+              <div
+                key="Phone"
+                className={`flex gap-4 group cursor-default p-4 rounded-xl hover:bg-gray-50 transition-all duration-300 animate-on-scroll ${isVisible ? "visible" : ""}`}
+              >
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                  <Phone
+                    size={24}
+                    className="text-primary group-hover:text-white transition-colors"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-gray-800 font-bold  mb-1 group-hover:text-primary transition-colors">
+                    Phone
+                  </h3>
+                  <div className="flex flex-col sm:flex-row gap-1">
+                    <div className="flex">
+                      <Dot />
+                      <p className="text-gray-700">+233 24 428 1798</p>
+                    </div>
+                    <div className="flex">
+                      <Dot />
+                      <p className="text-gray-700">+233 55 446 6790</p>
+                    </div>
+                    <div className="flex">
+                      <Dot />
+                      <p className="text-gray-700">+233 54 014 0001</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
               {contactInfo.map((item, index) => {
-                const Icon = item.icon
+                const Icon = item.icon;
                 return (
                   <div
                     key={item.title}
                     className={`flex gap-4 group cursor-default p-4 rounded-xl hover:bg-gray-50 transition-all duration-300 animate-on-scroll stagger-${index + 1} ${isVisible ? "visible" : ""}`}
                   >
-                    <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                      <Icon size={24} className="text-primary group-hover:text-white transition-colors" />
+                    <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                      <Icon
+                        size={24}
+                        className="text-primary group-hover:text-white transition-colors"
+                      />
                     </div>
                     <div>
-                      <h3 className="font-bold text-secondary mb-1 group-hover:text-primary transition-colors">
+                      <h3 className="text-gray-800 font-bold  mb-1 group-hover:text-primary transition-colors">
                         {item.title}
                       </h3>
                       <p className="text-gray-700">{item.content}</p>
-                      <p className="text-sm text-gray-500">{item.subtext}</p>
                     </div>
                   </div>
-                )
+                );
               })}
             </div>
 
-            <div className="rounded-2xl overflow-hidden h-64 bg-gradient-to-br from-primary/10 to-primary/5 border border-gray-200 flex items-center justify-center group hover:shadow-lg transition-all duration-300">
+            <div className="rounded-2xl overflow-hidden h-64 bg-linear-to-br from-primary/10 to-primary/5 border border-gray-200 flex items-center justify-center group hover:shadow-lg transition-all duration-300">
               <div className="text-center">
                 <MapPin
                   size={48}
                   className="text-primary/30 mx-auto mb-4 group-hover:scale-110 group-hover:text-primary/50 transition-all duration-300"
                 />
-                <p className="text-gray-500 group-hover:text-primary transition-colors">Store Location Map</p>
+                <p className="text-gray-500 group-hover:text-primary transition-colors">
+                  Store Location Map
+                </p>
               </div>
             </div>
           </div>
@@ -87,29 +191,50 @@ export default function Contact() {
           <div className={`animate-slide-right ${isVisible ? "visible" : ""}`}>
             <form
               onSubmit={handleSubmit}
-              className="space-y-6 bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-200 hover:shadow-xl transition-shadow duration-500"
+              className="space-y-6 bg-linear-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-200 hover:shadow-xl transition-shadow duration-500"
             >
               {["name", "email", "phone"].map((field, index) => (
-                <div key={field} className={`animate-on-scroll stagger-${index + 1} ${isVisible ? "visible" : ""}`}>
-                  <label className="block text-sm font-semibold text-secondary mb-2 capitalize">
-                    {field === "name" ? "Full Name" : field === "email" ? "Email Address" : "Phone Number"}
+                <div
+                  key={field}
+                  className={`animate-on-scroll stagger-${index + 1} ${isVisible ? "visible" : ""}`}
+                >
+                  <label className="block text-sm font-semibold text-gray-800 mb-2 capitalize">
+                    {field === "name"
+                      ? "Full Name"
+                      : field === "email"
+                        ? "Email Address"
+                        : "Phone Number"}
                   </label>
                   <input
-                    type={field === "email" ? "email" : field === "phone" ? "tel" : "text"}
+                    type={
+                      field === "email"
+                        ? "email"
+                        : field === "phone"
+                          ? "tel"
+                          : "text"
+                    }
                     name={field}
                     value={formData[field as keyof typeof formData]}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white transition-all duration-300"
                     placeholder={
-                      field === "name" ? "John Doe" : field === "email" ? "john@example.com" : "+233 00 000 0000"
+                      field === "name"
+                        ? "John Doe"
+                        : field === "email"
+                          ? "john@example.com"
+                          : "+233 00 000 0000"
                     }
                     required={field !== "phone"}
                   />
                 </div>
               ))}
 
-              <div className={`animate-on-scroll stagger-4 ${isVisible ? "visible" : ""}`}>
-                <label className="block text-sm font-semibold text-secondary mb-2">Message</label>
+              <div
+                className={`animate-on-scroll stagger-4 ${isVisible ? "visible" : ""}`}
+              >
+                <label className="block text-sm font-semibold text-gray-800 mb-2">
+                  Message
+                </label>
                 <textarea
                   name="message"
                   value={formData.message}
@@ -145,11 +270,13 @@ export default function Contact() {
                 )}
               </button>
 
-              <p className="text-xs text-gray-500 text-center">We'll get back to you as soon as possible</p>
+              <p className="text-xs text-gray-500 text-center">
+                We'll get back to you as soon as possible
+              </p>
             </form>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -31,7 +31,7 @@ export default function About() {
               <div className="inline-block px-4 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
                 About Us
               </div>
-              <h2 className="text-4xl font-bold text-secondary mb-6">
+              <h2 className="text-3xl font-bold text-secondary mb-6">
                 Caring for Your <span className="text-primary">Well-being</span> Since 1998
               </h2>
             </div>
