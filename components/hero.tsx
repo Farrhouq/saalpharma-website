@@ -15,9 +15,8 @@ import {
 
 export default function Hero() {
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
-  const { count: patientsCount, ref: patientsRef } = useCountAnimation(50000);
-  const { count: productsCount, ref: productsRef } = useCountAnimation(500);
-  const { count: locationsCount, ref: locationsRef } = useCountAnimation(25);
+  const { count: productsCount, ref: productsRef } = useCountAnimation(300);
+  const { count: locationsCount, ref: locationsRef } = useCountAnimation(2);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -61,9 +60,7 @@ export default function Hero() {
                 </span>
               </h1>
               <p className="text-lg mt-8 text-gray-600 leading-relaxed max-w-lg">
-                Trusted by over 50,000 patients, we provide quality medications,
-                healthcare products, and expert pharmaceutical services with
-                compassion and excellence.
+                Trusted by over 200 hospitals and pharmacies (both retail and wholesale).
               </p>
             </div>
 
@@ -90,17 +87,6 @@ export default function Hero() {
             </div>
 
             <div className="grid grid-cols-3 gap-4 pt-8 border-t border-gray-200">
-              <div className="group cursor-default">
-                <p className="text-2xl sm:text-3xl font-bold text-primary">
-                  <span ref={patientsRef} className="counter-animate">
-                    {patientsCount.toLocaleString()}
-                  </span>
-                  K+
-                </p>
-                <p className="text-sm text-gray-600 group-hover:text-primary transition-colors">
-                  Happy Patients
-                </p>
-              </div>
               <div className="group cursor-default">
                 <p className="text-2xl sm:text-3xl font-bold text-primary">
                   <span ref={productsRef} className="counter-animate">

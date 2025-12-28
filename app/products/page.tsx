@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState, useMemo } from "react";
 import Navigation from "@/components/navigation";
@@ -132,6 +133,7 @@ export default function ProductsPage() {
   const categoryParam = searchParams.get("category");
   const [selectedCategory, setSelectedCategory] = useState("appetite");
   const { cart, addToCart, updateQuantity } = useCart();
+  const { totalItems } = useCart();
 
   const filteredProducts = useMemo(() => {
     return allProducts.find((cat) => cat.id === selectedCategory);
@@ -297,6 +299,14 @@ export default function ProductsPage() {
                 })}
               </div>
             </div>
+          )}
+          {totalItems != 0 && (
+            <Link href="/checkout" className="block mt-5 w-fit">
+              <button className="w-full px-4 py-3 bg-primary text-white rounded-lg cursor-pointer hover:bg-primary/90 transition-colors text-sm font-medium mt-2 flex items-center justify-center gap-2">
+                <ShoppingCart size={18} />
+                Checkout ({totalItems})
+              </button>
+            </Link>
           )}
         </div>
       </section>

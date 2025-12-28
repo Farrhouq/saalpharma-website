@@ -1,7 +1,8 @@
 footer
 team members
-core values ?
 about us section info (and stats)
-hero section description text? (and hero stats)
 logo?
-responsiveness?
+
+button down there after products to go to checkout
+hero section description text? (and hero stats)
+core values ?
