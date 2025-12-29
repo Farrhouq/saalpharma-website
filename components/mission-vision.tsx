@@ -89,34 +89,34 @@ export default function MissionVision() {
           </div>
         </div>
 
-        <div
-          ref={valuesRef}
-          className={`mt-20 p-12 bg-linear-to-r from-secondary/5 to-primary/5 rounded-3xl border border-gray-200 animate-scale-on-scroll ${valuesVisible ? "visible" : ""}`}
-        >
-          <div className="flex items-center justify-center gap-2 mb-8">
-            <Sparkles size={24} className="text-primary animate-pulse" />
-            <h3 className="text-2xl font-bold text-secondary text-center">
-              Our Core Values
-            </h3>
-            <Sparkles size={24} className="text-primary animate-pulse" />
-          </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
-            {coreValues.map((value, index) => (
-              <div
-                key={value.title}
-                className={`text-center group cursor-default animate-on-scroll stagger-${index + 1} ${valuesVisible ? "visible" : ""}`}
-              >
-                <div className="text-4xl mb-4 group-hover:scale-125 transition-transform duration-300">
-                  {value.icon}
-                </div>
-                <p className="font-bold text-primary text-lg mb-2 group-hover:scale-105 transition-transform">
-                  {value.title}
-                </p>
-                <p className="text-sm text-gray-600">{value.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* <div */}
+        {/*   ref={valuesRef} */}
+        {/*   className={`mt-20 p-12 bg-linear-to-r from-secondary/5 to-primary/5 rounded-3xl border border-gray-200 animate-scale-on-scroll ${valuesVisible ? "visible" : ""}`} */}
+        {/* > */}
+        {/*   <div className="flex items-center justify-center gap-2 mb-8"> */}
+        {/*     <Sparkles size={24} className="text-primary animate-pulse" /> */}
+        {/*     <h3 className="text-2xl font-bold text-secondary text-center"> */}
+        {/*       Our Core Values */}
+        {/*     </h3> */}
+        {/*     <Sparkles size={24} className="text-primary animate-pulse" /> */}
+        {/*   </div> */}
+        {/*   <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8"> */}
+        {/*     {coreValues.map((value, index) => ( */}
+        {/*       <div */}
+        {/*         key={value.title} */}
+        {/*         className={`text-center group cursor-default animate-on-scroll stagger-${index + 1} ${valuesVisible ? "visible" : ""}`} */}
+        {/*       > */}
+        {/*         <div className="text-4xl mb-4 group-hover:scale-125 transition-transform duration-300"> */}
+        {/*           {value.icon} */}
+        {/*         </div> */}
+        {/*         <p className="font-bold text-primary text-lg mb-2 group-hover:scale-105 transition-transform"> */}
+        {/*           {value.title} */}
+        {/*         </p> */}
+        {/*         <p className="text-sm text-gray-600">{value.desc}</p> */}
+        {/*       </div> */}
+        {/*     ))} */}
+        {/*   </div> */}
+        {/* </div> */}
       </div>
     </section>
   );
