@@ -222,7 +222,7 @@ export default function CheckoutPage() {
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="text-gray-400 hover:text-red-500 shrink-0"
+                          className="cursor-pointer hover:text-red-600 hover:bg-white text-red-500 shrink-0"
                           onClick={() => removeFromCart(item.name)}
                         >
                           <Trash2 size={18} />

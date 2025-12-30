@@ -41,8 +41,8 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center group-hover:scale-110 transition-all duration-200 animate-pulse-glow">
-              <span className="text-white font-bold text-lg">+</span>
+            <div className="size-10">
+              <img src="/img/logo.png" alt="logo" />
             </div>
             <span className="font-bold text-lg text-secondary hidden sm:inline group-hover:text-primary transition-colors">
               SAAL PHARMA
@@ -54,7 +54,7 @@ export default function Navigation() {
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className="relative text-sm font-medium text-foreground hover:text-primary transition-colors group py-2"
+                className="cursor-pointer relative text-sm font-medium text-foreground hover:text-primary transition-colors group py-2"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {item}

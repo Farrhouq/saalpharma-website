@@ -110,8 +110,12 @@ const allProducts = [
         image: "/img/levothyroxin-sodium-500mcg-tablet.jpeg",
       },
       {
-        name: "Tylenol",
-        image: "/img/tylenol.webp",
+        name: "Carbimazole 5mg Cap",
+        image: "/img/Carbimazole 5mg Cap.jpeg",
+      },
+      {
+        name: "Carbimazole 20mg Cap",
+        image: "/img/Carbimazole 20mg Cap.jpeg",
       },
     ],
   },
@@ -123,6 +127,26 @@ const allProducts = [
       {
         name: "Tylenol",
         image: "/img/tylenol.webp",
+      },
+      {
+        name: "Ibuprofen 200mg Cap",
+        image: "/img/Ibuprofen 200mg Cap.jpeg",
+      },
+      {
+        name: "Ibuprofen 400mg Cap",
+        image: "/img/Ibuprofen 400mg Cap.jpeg",
+      },
+      {
+        name: "Diclofenac 75mg tab",
+        image: "/img/Diclofenac.jpeg",
+      },
+      {
+        name: "Diclofenac 100mg tab",
+        image: "/img/Diclofenac 100mg.jpeg",
+      },
+      {
+        name: "Naproxen 500mg cap",
+        image: "/img/Naproxen.jpeg",
       },
     ],
   },

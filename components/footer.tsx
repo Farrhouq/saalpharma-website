@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Facebook, Twitter, Instagram, Linkedin, ArrowUp } from "lucide-react"
-import { useEffect, useState } from "react"
+import Link from "next/link";
+import { Facebook, Twitter, Instagram, Linkedin, ArrowUp } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
-  const [showScrollTop, setShowScrollTop] = useState(false)
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 500)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+      setShowScrollTop(window.scrollY > 500);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <footer className="bg-secondary text-white relative overflow-hidden">
@@ -34,12 +34,16 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 group cursor-pointer">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                <span className="text-white font-bold text-xl">+</span>
+              <div className="size-10 bg-white rounded-lg flex items-center">
+                <img src="/img/logo.png" alt="logo" />
               </div>
-              <span className="font-bold text-xl group-hover:text-primary transition-colors">SAAL PHARMA</span>
+              <span className="font-bold text-xl group-hover:text-primary transition-colors">
+                SAAL PHARMA
+              </span>
             </div>
-            <p className="text-white/70 text-sm">Your trusted partner in healthcare since 1998.</p>
+            <p className="text-white/70 text-sm">
+              Your trusted partner in healthcare since 1998.
+            </p>
             <div className="flex gap-3 pt-4">
               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (
                 <button
@@ -54,9 +58,28 @@ export default function Footer() {
 
           {/* Links Sections */}
           {[
-            { title: "Company", links: ["About Us", "Our Team", "Careers", "Blog"] },
-            { title: "Services", links: ["Prescription Meds", "Wellness", "Consultations", "Emergency Care"] },
-            { title: "Legal", links: ["Privacy Policy", "Terms of Service", "Cookie Policy", "Contact"] },
+            {
+              title: "Company",
+              links: ["About Us", "Our Team", "Careers", "Blog"],
+            },
+            {
+              title: "Services",
+              links: [
+                "Prescription Meds",
+                "Wellness",
+                "Consultations",
+                "Emergency Care",
+              ],
+            },
+            {
+              title: "Legal",
+              links: [
+                "Privacy Policy",
+                "Terms of Service",
+                "Cookie Policy",
+                "Contact",
+              ],
+            },
           ].map((section) => (
             <div key={section.title} className="space-y-4">
               <h4 className="font-bold text-lg">{section.title}</h4>
@@ -79,7 +102,9 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-white/10 pt-8 mt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-white/60">
-            <p>© 2025 S.A.A Legacy Pharmaceuticals Limited. All rights reserved.</p>
+            <p>
+              © 2025 S.A.A Legacy Pharmaceuticals Limited. All rights reserved.
+            </p>
             <p>Designed with care for your health</p>
           </div>
         </div>
@@ -88,11 +113,13 @@ export default function Footer() {
       <button
         onClick={scrollToTop}
         className={`fixed bottom-8 right-8 p-3 bg-primary text-white rounded-full shadow-lg transition-all duration-500 hover:scale-110 hover:shadow-xl z-50 ${
-          showScrollTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
+          showScrollTop
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-10 pointer-events-none"
         }`}
       >
         <ArrowUp size={24} />
       </button>
     </footer>
-  )
+  );
 }
