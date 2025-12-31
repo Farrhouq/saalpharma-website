@@ -3,9 +3,12 @@
 import Link from "next/link";
 import { Facebook, Twitter, Instagram, Linkedin, ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Footer() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const pathName = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +20,14 @@ export default function Footer() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const scrollToSection = (id: string) => {
+    if (pathName !== "/") {
+      router.push(`/#${id}`);
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -42,7 +53,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-white/70 text-sm">
-              Your trusted partner in healthcare since 1998.
+              Your trusted partner in healthcare.
             </p>
             <div className="flex gap-3 pt-4">
               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (
@@ -60,25 +71,39 @@ export default function Footer() {
           {[
             {
               title: "Company",
-              links: ["About Us", "Our Team", "Careers", "Blog"],
+              links: ["About", "Products", "Team", "Contact"],
             },
+            // {
+            //   title: "Legal",
+            //   links: [
+            //     "Privacy Policy",
+            //     "Terms of Service",
+            //     "Cookie Policy",
+            //     "Contact",
+            //   ],
+            // },
+          ].map((section) => (
+            <div key={section.title} className="space-y-4">
+              <h4 className="font-bold text-lg">{section.title}</h4>
+              <ul className="space-y-2 text-sm">
+                {section.links.map((link) => (
+                  <li key={link}>
+                    <p
+                      onClick={() => scrollToSection(link.toLowerCase())}
+                      className="text-white/70 hover:text-primary cursor-pointer transition-colors inline-block hover:translate-x-1 duration-300"
+                    >
+                      {link}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          {[
             {
               title: "Services",
-              links: [
-                "Prescription Meds",
-                "Wellness",
-                "Consultations",
-                "Emergency Care",
-              ],
-            },
-            {
-              title: "Legal",
-              links: [
-                "Privacy Policy",
-                "Terms of Service",
-                "Cookie Policy",
-                "Contact",
-              ],
+              links: ["Prescription Meds", "Wellness", "Emergency Care"],
             },
           ].map((section) => (
             <div key={section.title} className="space-y-4">
@@ -86,12 +111,9 @@ export default function Footer() {
               <ul className="space-y-2 text-sm">
                 {section.links.map((link) => (
                   <li key={link}>
-                    <Link
-                      href="#"
-                      className="text-white/70 hover:text-primary transition-colors inline-block hover:translate-x-1 duration-300"
-                    >
+                    <p className="text-white/70 cursor-auto transition-colors inline-block duration-300">
                       {link}
-                    </Link>
+                    </p>
                   </li>
                 ))}
               </ul>

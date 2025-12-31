@@ -175,16 +175,14 @@ export default function Contact() {
               })}
             </div>
 
-            <div className="rounded-2xl overflow-hidden h-64 bg-linear-to-br from-primary/10 to-primary/5 border border-gray-200 flex items-center justify-center group hover:shadow-lg transition-all duration-300">
-              <div className="text-center">
-                <MapPin
-                  size={48}
-                  className="text-primary/30 mx-auto mb-4 group-hover:scale-110 group-hover:text-primary/50 transition-all duration-300"
-                />
-                <p className="text-gray-500 group-hover:text-primary transition-colors">
-                  Store Location Map
-                </p>
-              </div>
+            <div className="rounded-2xl overflow-hidden h-64 border border-gray-200 hover:shadow-lg transition-all duration-300">
+              <iframe
+                title="Store Location"
+                className="w-full h-full"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15849.893073371477!2d-1.5826106!3d6.7119514!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdb95005323f9a9%3A0x25b788316930eaae!2sLegacy%20Health%20Services%20wholesale!5e0!3m2!1sen!2sgh!4v1767141921661!5m2!1sen!2sgh"
+              />
             </div>
           </div>
 
