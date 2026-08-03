@@ -125,7 +125,7 @@ export default function Footer() {
         <div className="border-t border-white/10 pt-8 mt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-white/60">
             <p>
-              © 2025 S.A.A Legacy Pharmaceuticals Limited. All rights reserved.
+              © 2026 S.A.A Legacy Pharmaceuticals Limited. All rights reserved.
             </p>
             <p>Designed with care for your health</p>
           </div>
